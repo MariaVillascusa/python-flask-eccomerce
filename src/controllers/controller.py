@@ -21,3 +21,9 @@ class IndexController(MethodView):
             cur.connection.commit()
             return redirect('/')
 
+class DeleteProductController(MethodView):
+    def post(self, code):
+        with mysql.cursor() as cur:
+            cur.execute('DELETE FROM products WHERE code = %s',(code))
+            cur.connection.commit()
+            return redirect('/')

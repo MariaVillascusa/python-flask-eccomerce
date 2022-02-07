@@ -14,5 +14,8 @@
 
 {% for product in data %}
     {{ product.1 }}
+    <form action="/delete/product/{{ product.0 }}" method="post">
+        <button>Eliminar</button>
+    </form>
 {% endfor %}
 {% endblock %}
