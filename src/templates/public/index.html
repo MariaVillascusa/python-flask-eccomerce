@@ -17,5 +17,8 @@
     <form action="/delete/product/{{ product.0 }}" method="post">
         <button>Eliminar</button>
     </form>
+    <a href="/update/product/{{ product.0 }}">Actualizar</a>
+    {% else %}
+<p>No hay productos</p>
 {% endfor %}
 {% endblock %}
