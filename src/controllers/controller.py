@@ -1,3 +1,4 @@
+from itertools import product
 from flask import request, render_template, redirect
 from flask.views import MethodView
 from src.db import mysql
@@ -7,8 +8,10 @@ class IndexController(MethodView):
     def get(self):
         with mysql.cursor() as cur:
             cur.execute('SELECT * FROM products')
-            data = cur.fetchall()
-        return render_template('public/index.html', data=data)
+            products = cur.fetchall()
+            cur.execute('SELECT * FROM categories')
+            categories = cur.fetchall()
+        return render_template('public/index.html', products=products, categories=categories)
 
     def post(self):
         code = request.form['code']
@@ -19,7 +22,7 @@ class IndexController(MethodView):
 
         with mysql.cursor() as cur:
             cur.execute(
-                "INSERT INTO products(code, name, stock, value) VALUES(%s, %s, %s, %s)", (code, name, stock, value))
+                "INSERT INTO products(code, name, stock, value, id_category) VALUES(%s, %s, %s, %s, %s)", (code, name, stock, value, category))
             cur.connection.commit()
             return redirect('/')
 
@@ -54,3 +57,21 @@ class UpdateProductController(MethodView):
             cur.connection.commit()
 
         return f'Editing product {code} works'
+
+
+class CreateCategoriesController(MethodView):
+    def get(self):
+        return render_template('/public/categories.html')
+
+    def post(self):
+        id = request.form['id']
+        name = request.form['name']
+        description = request.form['description']
+        
+        with mysql.cursor() as cur:
+            cur.execute(
+                "INSERT INTO categories(id, name, description) VALUES(%s, %s, %s)", (id, name, description))
+            cur.connection.commit()
+            print(id,name, description)
+            return 'success'
+

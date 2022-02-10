@@ -6,13 +6,17 @@
     <input type="text" name="name" id="" placeholder="name">
     <input type="number" name="stock" id="" placeholder="stock">
     <input type="text" name="value" id="" placeholder="value">
-    <input type="text" name="category" id="" placeholder="category">
-
+    <select name="category" id="">
+        <option selected value="">Seleccione una categoría</option>
+        {% for category in categories %}
+        <option value="{{ category.0 }}">{{ category.1 }}</option>
+        {% endfor %}
+    </select>
     <button type="submit">Enviar</button>
 </form>
 
 
-{% for product in data %}
+{% for product in products %}
     {{ product.1 }}
     <form action="/delete/product/{{ product.0 }}" method="post">
         <button>Eliminar</button>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="/create/category" method="post">
+    <input type="number" name="id" id="" placeholder="id">
+    <input type="text" name="name" id="" placeholder="name">
+    <textarea name="description" id="" placeholder="description"></textarea>
+
+    <button type="submit">Crear</button>
+</form>
+
+{% endblock %}
