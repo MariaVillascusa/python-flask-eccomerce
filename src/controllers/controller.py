@@ -1,5 +1,5 @@
 from itertools import product
-from flask import request, render_template, redirect
+from flask import request, render_template, redirect, flash
 from flask.views import MethodView
 from src.db import mysql
 
@@ -21,9 +21,14 @@ class IndexController(MethodView):
         category = request.form['category']
 
         with mysql.cursor() as cur:
-            cur.execute(
+            try:
+                cur.execute(
                 "INSERT INTO products(code, name, stock, value, id_category) VALUES(%s, %s, %s, %s, %s)", (code, name, stock, value, category))
-            cur.connection.commit()
+                cur.connection.commit()
+                flash('El producto ha sido creado correctamente', 'success')
+            except:
+                flash('Ha ocurrido un error', 'error')
+
             return redirect('/')
 
 

@@ -3,6 +3,10 @@ from src.routes.routes import *
 
 app = Flask(__name__)	
 
+app.config.from_mapping(
+    SECRET_KEY='development'
+)
+
 # @app.route('/')
 # def hello_world():
 #     return 'HOLA A TODOS!'
