@@ -74,9 +74,12 @@ class CreateCategoriesController(MethodView):
         description = request.form['description']
         
         with mysql.cursor() as cur:
-            cur.execute(
-                "INSERT INTO categories(id, name, description) VALUES(%s, %s, %s)", (id, name, description))
-            cur.connection.commit()
-            print(id,name, description)
-            return 'success'
+            try:
+                cur.execute(
+                    "INSERT INTO categories(id, name, description) VALUES(%s, %s, %s)", (id, name, description))
+                cur.connection.commit()
+                flash('Nueva categoría creada', 'success')
+            except:
+                flash('Ha ocurrido un error', 'error')
+            return redirect('/')
 

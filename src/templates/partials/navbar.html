@@ -1,1 +1,59 @@
-<h1>SOY EL NAVBAR</h1>
+<nav class="navbar sticky-top navbar-dark elegant-color-dark scrolling-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">Flask-Ecommerce</a>
+        <div class="navbar-nav ml-auto">
+            <button class="btn deep-purple lighten-4  btn-sm" data-toggle="modal" data-target="#elegantModalForm">
+                Crear categoría <i class="fas fa-plus"> </i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Crear
+                        categoría</strong></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+
+                <form action="/create/category" method="POST">
+                    <div class="md-form">
+                        <input type="number" name="id" id="Form-id" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="Form-id"><i class="fas fa-barcode"></i>
+                            Asignar ID</label>
+                    </div>
+
+                    <div class="md-form">
+                        <input type="text" name="name" id="Form-name" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="Form-name"><i class="fas fa-signature"></i>
+                            Nombre</label>
+                    </div>
+
+                    <div class="md-form mb-4 blue-textarea active-blue-textarea">
+                        <textarea name="description" id="Form-description" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="Form-description"><i class="fas fa-pen"></i> Descripción</label>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button class="btn blue-gradient btn-block btn-rounded z-depth-1a">
+                            Crear <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal -->
