@@ -1,6 +1,6 @@
 {% with success = get_flashed_messages(category_filter=["success"])  %}
     {% if success %}
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <div class="alert alert-info alert-dismissible fade show text-center" role="alert">
             {% for message in success %}
             <i class="fas fa-check-circle"></i> {{ message }}
             {% endfor %}

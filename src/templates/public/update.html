@@ -1,13 +1,62 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-    <form action="/update/product/{{ product.0 }}" method="post">
-        <input type="number" name="code" value="{{ product.0 }}" id="" placeholder="code">
-        <input type="text" name="name" value="{{ product.1 }}" id="" placeholder="name">
-        <input type="number" name="stock" value="{{ product.2 }}" id="" placeholder="stock">
-        <input type="text" name="value" value="{{ product.3 }}" id="" placeholder="value">
-        <input type="text" name="category" value="{{ product.4 }}" id="" placeholder="category">
-    
-        <button type="submit">Editar</button>
-    </form>
-{% endblock %} 
+<section id="edit-product">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-lg-12">
+                <div id="content-edit-product" class="justify-content-center align-self-center mx-auto my-5">
+                    <div class="card">
+                        <div class="card-header text-center stylish-color text-white">
+                            <h2>Editar producto</h2>
+                        </div>
+                        <div class="card-body">
+                            <form action="/update/product/{{product.0}}" method="POST" class="px-5">
+                                <div class="md-form row">
+                                    <div class="col">
+                                        <input type="number" name="code" value="{{ product.0 }}" class="form-control"
+                                            id="codeInput" required autofocus>
+                                        <label class="ml-3" for="codeInput">Código</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="name" value="{{ product.1 }}" class="form-control"
+                                            id="nameInput" required>
+                                        <label class="ml-3" for="nameInput">Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="md-form row">
+                                    <div class="col">
+                                        <input type="number" name="stock" value="{{ product.2 }}" class="form-control"
+                                            id="stockInput" required>
+                                        <label class="ml-3" for="stockInput">Disponibilidad</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" name="value" value="{{ product.3 }}" class="form-control"
+                                            id="valueInput" required>
+                                        <label class="ml-3" for="valueInput">Valor</label>
+                                    </div>
+                                </div>
+                                <div class="md-form">
+                                    <select name="category" class="custom-select" id="categoryInput">
+                                        <option selected value="{{ product.4 }}">Seleccionar categoría</option>
+
+                                        {% for categorie in categories %}
+                                        <option value="{{ categorie.0 }}">{{ categorie.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="md-form">
+                                    <button class="btn btn-default btn-lg btn-block">
+                                        Editar <i class="fas fa-pen"></i>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

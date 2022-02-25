@@ -1,4 +1,5 @@
 from itertools import product
+from nis import cat
 from flask import request, render_template, redirect, flash
 from flask.views import MethodView
 from src.db import mysql
@@ -35,9 +36,13 @@ class IndexController(MethodView):
 class DeleteProductController(MethodView):
     def post(self, code):
         with mysql.cursor() as cur:
-            cur.execute(
-                'DELETE FROM products WHERE code = %s', (code))
-            cur.connection.commit()
+            try:
+                cur.execute(
+                    'DELETE FROM products WHERE code = %s', (code))
+                cur.connection.commit()
+                flash('Producto eliminado', 'success')
+            except:
+                flash('Ha ocurrido un error en el proceso de eliminación del producto', 'error')
             return redirect('/')
 
 
@@ -47,7 +52,9 @@ class UpdateProductController(MethodView):
             cur.execute(
                 'SELECT * FROM products WHERE code = %s', (code))
             product = cur.fetchone()
-            return render_template('/public/update.html', product=product)
+            cur.execute('SELECT * FROM categories')
+            categories = cur.fetchall()
+            return render_template('/public/update.html', product=product, categories=categories)
 
     def post(self, code):
         productCode = request.form['code']
@@ -57,11 +64,14 @@ class UpdateProductController(MethodView):
         category = request.form['category']
 
         with mysql.cursor() as cur:
-            cur.execute(
-                "UPDATE products SET code = %s, name = %s, stock = %s, value = %s WHERE code = %s", (productCode, name, stock, value, code))
-            cur.connection.commit()
-
-        return f'Editing product {code} works'
+            try:
+                cur.execute(
+                    "UPDATE products SET code = %s, name = %s, stock = %s, value = %s, id_category = %s WHERE code = %s", (productCode, name, stock, value, category, code))
+                cur.connection.commit()
+                flash('Producto actualizado con éxito', 'success')
+            except:
+                flash('Ha ocurrido un error en el proceso de actualización del producto', 'error')
+            return redirect('/')
 
 
 class CreateCategoriesController(MethodView):
@@ -83,3 +93,22 @@ class CreateCategoriesController(MethodView):
                 flash('Ha ocurrido un error', 'error')
             return redirect('/')
 
+class ShowCategoriesController(MethodView):
+    def get(self):
+        with mysql.cursor() as cur:
+            cur.execute('SELECT * FROM categories')
+            categories = cur.fetchall()
+        return render_template('public/show_categories.html', categories=categories)
+
+
+class DeleteCategoryController(MethodView):
+    def post(self, id):
+        with mysql.cursor() as cur:
+            try:
+                cur.execute(
+                    'DELETE FROM categories WHERE id = %s', (id))
+                cur.connection.commit()
+                flash('Categoria eliminada', 'success')
+            except:
+                flash('La categoría tiene asociada productos y no se puede borrar', 'error')
+            return redirect('/categories')

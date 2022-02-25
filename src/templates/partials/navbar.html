@@ -1,59 +1,91 @@
-<nav class="navbar sticky-top navbar-dark elegant-color-dark scrolling-navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="/">Flask-Ecommerce</a>
-        <div class="navbar-nav ml-auto">
-            <button class="btn deep-purple lighten-4  btn-sm" data-toggle="modal" data-target="#elegantModalForm">
-                Crear categoría <i class="fas fa-plus"> </i>
-            </button>
-        </div>
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+    <a class="navbar-brand text-white font-weight-bold" href="#">Flask-App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/categories">Categorías
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="https://twitter.com/H5uarez" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="https://www.instagram.com/h5uarez/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="https://www.twitch.tv/h5uarez" target="_blank">
+                <i class="fab fa-twitch"></i>
+            </a>
+        </li>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav ml-auto">
+                <button class="btn stylish-color text-white btn-sm rounded-pill  waves-effect waves-light"
+                    data-toggle="modal" data-target="#modalForm">
+                    Crear categoría <i class="fas fa-plus"></i>
+                </button>
+            </div>
+    </ul>
     </div>
 </nav>
 
 
-<!-- Modal -->
-<div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <!--Content-->
-        <div class="modal-content form-elegant">
-            <!--Header-->
+        <div class="modal-content">
             <div class="modal-header text-center">
-                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Crear
-                        categoría</strong></h3>
+                <h4 class="modal-title w-100 font-weight-bold">Crear categoría</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--Body-->
-            <div class="modal-body mx-4">
-
+            <div class="modal-body mx-3">
                 <form action="/create/category" method="POST">
-                    <div class="md-form">
-                        <input type="number" name="id" id="Form-id" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="Form-id"><i class="fas fa-barcode"></i>
-                            Asignar ID</label>
+                    <div class="md-form mb-5">
+                        <i class="fas fa-id-card prefix grey-text"></i>
+                        <input type="number" name="id" id="defaultForm-email" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-email">Asignar ID</label>
                     </div>
 
-                    <div class="md-form">
-                        <input type="text" name="name" id="Form-name" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="Form-name"><i class="fas fa-signature"></i>
-                            Nombre</label>
+                    <div class="md-form mb-4">
+                        <i class="fas fa-signature prefix grey-text"></i>
+                        <input type="text" name="name" id="defaultForm-pass" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Nombre de la
+                            categoría</label>
                     </div>
 
-                    <div class="md-form mb-4 blue-textarea active-blue-textarea">
-                        <textarea name="description" id="Form-description" class="md-textarea form-control" rows="3"></textarea>
-                        <label for="Form-description"><i class="fas fa-pen"></i> Descripción</label>
+                    <div class="md-form mb-4">
+                        <i class="fas fa-pen-square prefix grey-text"></i>
+                        <textarea name="description" id="defaultForm-description" class="md-textarea form-control">
+                        </textarea>
                     </div>
-
-                    <div class="text-center mb-3">
-                        <button class="btn blue-gradient btn-block btn-rounded z-depth-1a">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-default btn-lg btn-block">
                             Crear <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                </form>
-            </div>
 
+                </form>
+
+            </div>
         </div>
     </div>
 </div>
-<!-- Modal -->
